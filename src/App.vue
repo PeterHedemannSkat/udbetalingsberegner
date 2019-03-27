@@ -1,7 +1,7 @@
 <template>
   <div class="row" id="app">
-    <div class="col">
-      <h1>Udbetalingsberegner</h1>
+    <div class="col pt-3">
+      <ProgressBar :stepCount="3" :activeStep="activeStep"/>
       <Loading v-if="step === 'loading'"/>
       <Selection v-if="step === 'selection'" v-model="userInput" v-on:changeStep="changeStep"/>
       <AbleToPay
@@ -39,6 +39,7 @@ import AbleToPay from "./components/AbleToPay";
 import AbleToPayCalculation from "./components/AbleToPayCalculation";
 import EmployeeWants from "./components/EmployeeWants";
 import EmployeeWantsCalculation from "./components/EmployeeWantsCalculation";
+import ProgressBar from "./components/ProgressBar";
 
 export default {
   name: "app",
@@ -99,6 +100,7 @@ export default {
     };
   },
   components: {
+    ProgressBar,
     Loading,
     Selection,
     AbleToPay,
@@ -132,6 +134,9 @@ export default {
     atpMedarbejder() {
       let rate = this.atpRate();
       return rate ? rate.medarbejder : null;
+    },
+    activeStep() {
+      return this.step === "selection" ? 1 : this.step === "userinput" ? 2 : 3;
     }
   },
   created() {
