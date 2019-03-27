@@ -1,12 +1,14 @@
 <template>
   <form @submit="next">
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white py-3">
+      <div class="col d-flex align-items-center">
         <label for="udbetaltEfterSkat">Udbetalt efter skat</label>
+      </div>
+      <div class="col">
         <div class="input-group">
           <input
             type="text"
-            class="form-control"
+            class="form-control text-right"
             id="udbetaltEfterSkat"
             v-model.number="value.udbetaltEfterSkat"
             @input="update('udbetaltEfterSkat', $event.target.value)"
@@ -17,8 +19,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white py-3">
+      <div class="col">
         <fieldset>
           <legend>Udbetalingsfrekvens</legend>
           <div class="custom-control custom-radio">
@@ -48,15 +50,17 @@
         </fieldset>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white py-3">
+      <div class="col d-flex align-items-center">
         <label for="arbejdsTimer">Arbejdstimer</label>
+      </div>
+      <div class="col">
         <div class="input-group">
           <input
             v-model.number="value.arbejdsTimer"
             @input="update('arbejdsTimer', $event.target.value)"
             type="text"
-            class="form-control"
+            class="form-control text-right"
             aria-label="Beløb selskabet kan betale"
           >
           <div class="input-group-append">
@@ -65,8 +69,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white mt-3 py-3">
+      <div class="col">
         <h2>Oplysninger om den ansattes skattekort</h2>
         <fieldset>
           <legend>skattekort</legend>
@@ -97,16 +101,18 @@
         </fieldset>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white py-3">
+      <div class="col">
         <label for="traekprocent">Trækprocent</label>
+      </div>
+      <div class="col">
         <div class="input-group">
           <input
             v-model.number="value.traekprocent"
             @input="update('traekprocent', $event.target.value)"
             id="traekprocent"
             type="text"
-            class="form-control"
+            class="form-control text-right"
           >
           <div class="input-group-append">
             <span class="input-group-text">%</span>
@@ -114,16 +120,18 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
+    <div class="row bg-white py-3">
+      <div class="col">
         <label for="fradrag">Månedsfradrag</label>
+      </div>
+      <div class="col">
         <div class="input-group">
           <input
             v-model="value.fradrag"
             @input="update('traekprocent', $event.target.value)"
             id="fradrag"
             type="text"
-            class="form-control"
+            class="form-control text-right"
           >
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
@@ -131,8 +139,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-3">
+    <div class="row mt-3 bg-white py-3">
+      <div class="col d-flex justify-content-between">
         <button
           type="button"
           class="btn btn-primary"

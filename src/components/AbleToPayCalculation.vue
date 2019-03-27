@@ -1,38 +1,32 @@
 <template>
   <div>
-    <h2>Hvis selskabet betaler</h2>
-    <p>{{formatValuta(userInput.selskabetBetaler)}}</p>
-    <h2>Får modtageren udbetalt</h2>
-    <p>{{formatValuta(lonEfterSkat)}}</p>
-    <h2>Beregning</h2>
-    <hr>
-    <div class="row">
-      <div class="col-sm-3">Lønomkostninger</div>
-      <div class="col-sm-3">{{formatValuta(userInput.selskabetBetaler)}}</div>
+    <div class="row text-center bg-white">
+      <div class="col">
+        <h2>Hvis selskabet betaler</h2>
+        <p>{{formatValuta(userInput.selskabetBetaler)}}</p>
+        <h2>Får modtageren udbetalt</h2>
+        <p>{{formatValuta(lonEfterSkat)}}</p>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-sm-3">ATP - Arbejdsgiver</div>
-      <div class="col-sm-3">{{formatValuta(atpArbejdsgiver)}}</div>
+    <div class="row bg-white py-3 mt-3">
+      <div class="col-12">
+        <h2>Beregning</h2>
+      </div>
+      <div class="col-sm-6">Lønomkostninger</div>
+      <div class="col-sm-6 text-right">{{formatValuta(userInput.selskabetBetaler)}}</div>
+      <div class="col-sm-6">ATP - Arbejdsgiver</div>
+      <div class="col-sm-6 text-right">{{formatValuta(atpArbejdsgiver)}}</div>
+      <div class="col-sm-6">Løn før skat</div>
+      <div class="col-sm-6 text-right">{{formatValuta(lonForSkat)}}</div>
+      <div class="col-sm-6">ATP - Medarbejder</div>
+      <div class="col-sm-6 text-right">{{formatValuta(atpMedarbejder)}}</div>
+      <div class="col-sm-6">AM-Bidrag (8% af {{formatValuta(lonForSkat - atpMedarbejder)}})</div>
+      <div class="col-sm-6 text-right">{{formatValuta(amBidrag)}}</div>
+      <div class="col-sm-6">A-skat ({{userInput.traekprocent}}% af {{formatValuta(aIndkomst)}})</div>
+      <div class="col-sm-6 text-right">{{formatValuta(aSkat)}}</div>
     </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-3">Løn før skat</div>
-      <div class="col-sm-3">{{formatValuta(lonForSkat)}}</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">ATP - Medarbejder</div>
-      <div class="col-sm-3">{{formatValuta(atpMedarbejder)}}</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">AM-Bidrag (8% af {{formatValuta(lonForSkat - atpMedarbejder)}})</div>
-      <div class="col-sm-3">{{formatValuta(amBidrag)}}</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">A-skat ({{userInput.traekprocent}}% af {{formatValuta(aIndkomst)}})</div>
-      <div class="col-sm-3">{{formatValuta(aSkat)}}</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">
+    <div class="row bg-white py-3 mt-3">
+      <div class="col">
         <button class="btn btn-primary" @click="$emit('changeStep', 'userinput')">Tilbage</button>
       </div>
     </div>

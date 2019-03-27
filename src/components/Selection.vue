@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
-    <div class="col-sm-6">
-      <form @submit="next">
+  <form @submit="next">
+    <div class="row">
+      <div class="col bg-white py-3">
         <div class="custom-control custom-radio">
           <input
             v-model="value.selection"
@@ -32,10 +32,14 @@
             for="employeewant"
           >Den ansatte vil have følgende udbetalt - regn ud, hvad selskabet skal udbetale</label>
         </div>
-        <button class="btn btn-primary" :disabled="!value.selection" type="submit">Næste</button>
-      </form>
+      </div>
     </div>
-  </div>
+    <div class="row bg-white mt-3 py-3">
+      <div class="col d-flex justify-content-end">
+        <button class="btn btn-primary" :disabled="!value.selection" type="submit">Næste</button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
