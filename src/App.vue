@@ -11,9 +11,9 @@
       />
       <AbleToPayCalculation
         v-if="step === 'conclusion' && userInput.selection === 'able'"
-        v-bind:userInput="userInput"
-        v-bind:atpMedarbejder="atpMedarbejder"
-        v-bind:atpArbejdsgiver="atpArbejdsgiver"
+        :userInput="userInput"
+        :atpMedarbejder="atpMedarbejder"
+        :atpArbejdsgiver="atpArbejdsgiver"
         v-on:changeStep="changeStep"
       />
       <EmployeeWants
@@ -23,9 +23,9 @@
       />
       <EmployeeWantsCalculation
         v-if="step === 'conclusion' && userInput.selection === 'want'"
-        v-bind:userInput="userInput"
-        v-bind:atpMedarbejder="atpMedarbejder"
-        v-bind:atpArbejdsgiver="atpArbejdsgiver"
+        :userInput="userInput"
+        :atpMedarbejder="atpMedarbejder"
+        :atpArbejdsgiver="atpArbejdsgiver"
         v-on:changeStep="changeStep"
       />
     </div>
