@@ -1,5 +1,11 @@
 # udbetalingsberegner
 
+følgende skal indsættes i dap på oid 9510:
+
+    <div id="app"></div>
+    <script src="js/vueapps/udbetalingsberegner/app.js"></script>
+    <script src="js/vueapps/udbetalingsberegner/chunk-vendors.js"></script>
+
 ## Prototype
 
 [https://zzleiy.axshare.com/#id=a4dqiu&p=6&g=1](https://zzleiy.axshare.com/#id=a4dqiu&p=6&g=1)
