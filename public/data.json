@@ -1,0 +1,268 @@
+[
+  {
+    "data": {
+      "type": "dap",
+      "id": "111229",
+      "oid": "13508",
+      "application": "Udbetalingsberegner",
+      "version": "version 95.1 - onepage fix",
+      "system": "Intra/inter-net peter"
+    },
+    "oid": "13511",
+    "id": "111482",
+    "application": "Tekster",
+    "children": [
+      {
+        "oid": "13738",
+        "id": "SelectionChooseCalculation",
+        "lvl": "1",
+        "description": "Introvalg - Vælg beregning",
+        "da": "Vælg beregning"
+      },
+      {
+        "oid": "13509",
+        "id": "SelectionCompanyCanPay",
+        "lvl": "1",
+        "description": "Introvalg - Selskabet kan udbetale",
+        "da": "Selskabet kan betale X kroner. Regn ud, hvad den ansatte får udbetalt efter skat."
+      },
+      {
+        "oid": "13510",
+        "id": "SelectionEmployeeWants",
+        "lvl": "1",
+        "description": "Introvalg - Ansat kræver",
+        "da": "Den ansatte skal have udbetalt X kroner efter skat. Regn ud, hvad selskabet skal betale."
+      },
+      {
+        "oid": "13643",
+        "id": "UserInputPaymentInfo",
+        "lvl": "1",
+        "description": "Brugerinput - Oplysninger om betalingen",
+        "da": "Oplysninger om betalingen"
+      },
+      {
+        "oid": "13512",
+        "id": "UserInputCompanyCanPay",
+        "lvl": "1",
+        "description": "Brugerinput - Selskabet kan betale",
+        "da": "Selskabet kan betale"
+      },
+      {
+        "oid": "13590",
+        "id": "UserInputPayAfterTaxes",
+        "lvl": "1",
+        "description": "Brugerinput - Udbetalt efter skat",
+        "da": "Den ansatte skal have udbetalt"
+      },
+      {
+        "oid": "13513",
+        "id": "UserInputPaymentFrequency",
+        "lvl": "1",
+        "description": "Brugerinput - Udbetalingsfrekvens",
+        "da": "Lønperiode"
+      },
+      {
+        "oid": "13514",
+        "id": "UserInputPaymentFrequencyMonth",
+        "lvl": "1",
+        "description": "Brugerinput - Udbetalingsfrekvens - måned",
+        "da": "Måned"
+      },
+      {
+        "oid": "13515",
+        "id": "UserInputPaymentFrequency14Days",
+        "lvl": "1",
+        "description": "Brugerinput - Udbetalingsfrekvens - Fjorten dage",
+        "da": "14 dage"
+      },
+      {
+        "oid": "13516",
+        "id": "UserInputWorkHours",
+        "lvl": "1",
+        "description": "Brugerinput - Arbejdstimer",
+        "da": "Arbejdstimer"
+      },
+      {
+        "oid": "13517",
+        "id": "UserInputEmployeeTaxInfo",
+        "lvl": "1",
+        "description": "Brugerinput - Oplysninger om den ansattes skattekort",
+        "da": "Oplysninger fra den ansattes skattekort"
+      },
+      {
+        "oid": "13518",
+        "id": "UserInputTaxCard",
+        "lvl": "1",
+        "description": "Brugerinput - Skattekort",
+        "da": "Skattekort"
+      },
+      {
+        "oid": "13519",
+        "id": "UserInputPrimaryTaxCard",
+        "lvl": "1",
+        "description": "BrugerInput - Hovedkort",
+        "da": "Hovedkort"
+      },
+      {
+        "oid": "13520",
+        "id": "UserInputSecondaryTaxCard",
+        "lvl": "1",
+        "description": "Brugerinput - Bikort",
+        "da": "Bikort"
+      },
+      {
+        "oid": "13521",
+        "id": "UserInputWithholdingRate",
+        "lvl": "1",
+        "description": "Brugerinput - Trækprocent",
+        "da": "Trækprocent"
+      },
+      {
+        "oid": "13522",
+        "id": "UserInputDeduction",
+        "lvl": "1",
+        "description": "Brugerinput - Fradrag",
+        "da": "Månedsfradrag"
+      },
+      {
+        "oid": "13523",
+        "id": "ResultIfCompanyPays",
+        "lvl": "1",
+        "description": "Resultat - Hvis selskabet betaler",
+        "da": "Hvis selskabet betaler"
+      },
+      {
+        "oid": "13598",
+        "id": "ResultIfEmployeeGets",
+        "lvl": "1",
+        "description": "Resultat - Hvis medarbejder får",
+        "da": "Hvis den ansatte skal have udbetalt"
+      },
+      {
+        "oid": "13524",
+        "id": "ResultEmployeeGets",
+        "lvl": "1",
+        "description": "Resultat - Får modtageren udbetalt",
+        "da": "Får den ansatte udbetalt"
+      },
+      {
+        "oid": "13606",
+        "id": "ResultCompanyHasToPay",
+        "lvl": "1",
+        "description": "Resultat - Skal selskabet betale",
+        "da": "Skal selskabet betale"
+      },
+      {
+        "oid": "13525",
+        "id": "ResultCalculation",
+        "lvl": "1",
+        "description": "Resultat - Beregning",
+        "da": "Beregning"
+      },
+      {
+        "oid": "13526",
+        "id": "ResultPayCosts",
+        "lvl": "1",
+        "description": "Resultat - Lønomkostninger",
+        "da": "Lønomkostninger"
+      },
+      {
+        "oid": "13527",
+        "id": "ResultATPEmployer",
+        "lvl": "1",
+        "description": "Resultat - ATP - Arbejdsgiver",
+        "da": "ATP - Arbejdsgivers del"
+      },
+      {
+        "oid": "13540",
+        "id": "ResultATPEmployee",
+        "lvl": "1",
+        "description": "Resultat - ATP - Medarbejder",
+        "da": "ATP - Ansattes del"
+      },
+      {
+        "oid": "13571",
+        "id": "ResultPayBeforeTaxes",
+        "lvl": "1",
+        "description": "Resultat - Løn før Skat",
+        "da": "Løn før skat"
+      },
+      {
+        "oid": "13574",
+        "id": "ResultLabourMarketContributions",
+        "lvl": "1",
+        "description": "Resultat - AM-bidrag",
+        "da": "Am-bidrag"
+      },
+      {
+        "oid": "13575",
+        "id": "ResultATax",
+        "lvl": "1",
+        "description": "Resultat - A-skat",
+        "da": "A-skat"
+      },
+      {
+        "oid": "13741",
+        "id": "ResultAIncome",
+        "lvl": "1",
+        "description": "Resultat - A indkomst",
+        "da": "A-indkomst"
+      },
+      {
+        "oid": "13617",
+        "id": "ResultPayOut",
+        "lvl": "1",
+        "description": "Resultat - Udbetalt",
+        "da": "Udbetalt"
+      },
+      {
+        "oid": "13671",
+        "id": "ResultPayCostExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring til Lønomkostninger",
+        "da": "<p>Selskabets samlede udgift ved at betale løn. Det vil her sige den ansattes løn og selskabets ATP-bidrag. I praksis kan der være andre omkostninger som fx pension og feriepenge.</p>",
+        "Hjælpetekst": "<p>Selskabets samlede udgift ved at betale løn. Det vil her sige den ansattes løn og selskabets ATP-bidrag. I praksis kan der være andre omkostninger som fx pension og feriepenge.</p>"
+      },
+      {
+        "oid": "13697",
+        "id": "ResultATPEmployerExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring af ATP - Arbejdsgiver",
+        "da": "Forklaring af ATP - Arbejdsgiver",
+        "Hjælpetekst": "<p>ATP betales efter en fast sats. Satsen afhænger af, om den ansatte er månedslønnet eller 14-dages-lønnet, og hvor mange timer den ansatte arbejder. Du kan se satserne på <a href=\"https://indberet.virk.dk/atp-livslang-pension/privat-virksomhed/atp-satser\" target=\"_blank\" rel=\"noopener\">virk.dk</a>.</p>"
+      },
+      {
+        "oid": "13715",
+        "id": "ResultPayBeforeTaxesExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring af Løn før skat",
+        "da": "Forklaring af Løn før skat",
+        "Hjælpetekst": "<p>Lønnen før skat beregnes som selskabets lønomkostninger fratrukket selskabets ATP-bidrag, der normalt ikke regnes som en del af lønnen.</p>"
+      },
+      {
+        "oid": "13735",
+        "id": "ResultATPEmployeeExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring af ATP - Ansatte",
+        "da": "Forklaring af ATP - Ansatte",
+        "Hjælpetekst": "<p>ATP betales efter en fast sats. Satsen afhænger af, om den ansatte er månedslønnet eller 14-dages-lønnet, og hvor mange timer den ansatte arbejder. Du kan se satserne på <a href=\"https://indberet.virk.dk/atp-livslang-pension/privat-virksomhed/atp-satser\" target=\"_blank\" rel=\"noopener\">virk.dk</a>.</p>"
+      },
+      {
+        "oid": "13736",
+        "id": "ResultLabourMarketContributionsExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring af Am-bidrag",
+        "da": "Forklaring af Am-bidrag",
+        "Hjælpetekst": "Am-bidraget bliver beregnet ud fra am-grundlaget, som er lønnen før skat fratrukket den ansattes ATP-bidrag."
+      },
+      {
+        "oid": "13737",
+        "id": "ResultATaxExplanation",
+        "lvl": "1",
+        "description": "Resultat - Forklaring af A-skat",
+        "da": "Forklaring af A-skat",
+        "Hjælpetekst": "<p>A-skatten bliver beregnet ud fra A-indkomsten, som er lønnen før skat fratrukket den ansattes ATP-bidrag, am-bidraget og den ansattes fradrag.</p>"
+      }
+    ]
+  }
+]

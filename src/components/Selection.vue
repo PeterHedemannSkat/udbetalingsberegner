@@ -2,6 +2,7 @@
   <form @submit="next">
     <div class="row">
       <div class="col bg-white py-3">
+        <h2>{{texts.SelectionChooseCalculation}}</h2>
         <div class="custom-control custom-radio">
           <input
             v-model="value.selection"
@@ -12,10 +13,7 @@
             name="selection"
             class="custom-control-input"
           >
-          <label
-            class="custom-control-label"
-            for="able2pay"
-          >Selskabet kan udbetale følgende beløb - regn ud, hvad den ansatte får udbetalt</label>
+          <label class="custom-control-label" for="able2pay">{{texts.SelectionCompanyCanPay}}</label>
         </div>
         <div class="custom-control custom-radio">
           <input
@@ -27,10 +25,7 @@
             name="selection"
             class="custom-control-input"
           >
-          <label
-            class="custom-control-label"
-            for="employeewant"
-          >Den ansatte vil have følgende udbetalt - regn ud, hvad selskabet skal udbetale</label>
+          <label class="custom-control-label" for="employeewant">{{texts.SelectionEmployeeWants}}</label>
         </div>
       </div>
     </div>
@@ -45,7 +40,7 @@
 <script>
 export default {
   name: "Selection",
-  props: ["value"],
+  props: ["value", "texts"],
   methods: {
     next(e) {
       e.preventDefault();

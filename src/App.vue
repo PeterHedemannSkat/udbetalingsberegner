@@ -3,14 +3,21 @@
     <div class="col pt-3">
       <ProgressBar :stepCount="3" :activeStep="activeStep"/>
       <Loading v-if="step === 'loading'"/>
-      <Selection v-if="step === 'selection'" v-model="userInput" v-on:changeStep="changeStep"/>
+      <Selection
+        v-if="step === 'selection'"
+        v-model="userInput"
+        v-on:changeStep="changeStep"
+        :texts="texts"
+      />
       <AbleToPay
         v-if="step === 'userinput' && userInput.selection === 'able'"
         v-model="userInput"
+        :texts="texts"
         v-on:changeStep="changeStep"
       />
       <AbleToPayCalculation
         v-if="step === 'conclusion' && userInput.selection === 'able'"
+        :texts="texts"
         :userInput="userInput"
         :atpMedarbejder="atpMedarbejder"
         :atpArbejdsgiver="atpArbejdsgiver"
@@ -18,11 +25,13 @@
       />
       <EmployeeWants
         v-if="step === 'userinput' && userInput.selection === 'want'"
+        :texts="texts"
         v-model="userInput"
         v-on:changeStep="changeStep"
       />
       <EmployeeWantsCalculation
         v-if="step === 'conclusion' && userInput.selection === 'want'"
+        :texts="texts"
         :userInput="userInput"
         :atpMedarbejder="atpMedarbejder"
         :atpArbejdsgiver="atpArbejdsgiver"
@@ -56,6 +65,7 @@ export default {
         traekprocent: 36,
         fradrag: 6800
       },
+      texts: {},
       ATPRates: {
         maanedlig: [
           {
@@ -140,7 +150,29 @@ export default {
     }
   },
   created() {
-    this.step = "selection";
+    let _this = this;
+    let url =
+      document.location.hostname === "localhost"
+        ? "data.json"
+        : "http://testdap.ccta.dk/peter/websrv/jsong.ashx?Id=111229";
+
+    // eslint-disable-next-line
+    $.ajax({
+      type: "GET",
+      url: url,
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data) {
+        let texts = {};
+        data[0].children.forEach(text => {
+          texts[text.id] = text.da;
+        });
+        _this.texts = texts;
+        _this.step = "selection";
+      },
+      dataType: "JSON"
+    });
   }
 };
 </script>

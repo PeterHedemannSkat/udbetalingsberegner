@@ -1,15 +1,18 @@
 <template>
   <form @submit="next">
     <div class="row bg-white pt-3">
-      <div class="col d-flex align-items-center">
-        <label for="selskabetBetaler">Selskabet kan betale</label>
+      <div class="col-sm-12">
+        <h2>{{texts.UserInputPaymentInfo}}</h2>
       </div>
-      <div class="col">
+      <div class="col-sm-6 d-flex align-items-center">
+        <label for="selskabetBetaler">{{texts.UserInputCompanyCanPay}}</label>
+      </div>
+      <div class="col-sm-6">
         <div class="input-group">
           <input
             id="selskabetBetaler"
             v-model.number="value.selskabetBetaler"
-            @input="update('selskabetBetaler', $event.target.value)"
+            @input="update('selskabetBetaler', $event.target.value, true)"
             type="text"
             class="form-control text-right"
             aria-label="Beløb selskabet kan betale"
@@ -23,7 +26,7 @@
     <div class="row bg-white pt-3">
       <div class="col">
         <fieldset>
-          <legend>Udbetalingsfrekvens</legend>
+          <legend>{{texts.UserInputPaymentFrequency}}</legend>
           <div class="custom-control custom-radio">
             <input
               v-model="value.udbetalingsFrekvens"
@@ -34,7 +37,10 @@
               value="maanedlig"
               class="custom-control-input"
             >
-            <label class="custom-control-label" for="maanedlig">Måned</label>
+            <label
+              class="custom-control-label"
+              for="maanedlig"
+            >{{texts.UserInputPaymentFrequencyMonth}}</label>
           </div>
           <div class="custom-control custom-radio">
             <input
@@ -46,20 +52,23 @@
               value="fjortendage"
               class="custom-control-input"
             >
-            <label class="custom-control-label" for="fjortendage">14 dage</label>
+            <label
+              class="custom-control-label"
+              for="fjortendage"
+            >{{texts.UserInputPaymentFrequency14Days}}</label>
           </div>
         </fieldset>
       </div>
     </div>
     <div class="row bg-white pb-3">
       <div class="col d-flex align-items-center">
-        <label for="arbejdsTimer">Arbejdstimer</label>
+        <label for="arbejdsTimer">{{texts.UserInputWorkHours}}</label>
       </div>
       <div class="col">
         <div class="input-group">
           <input
             v-model.number="value.arbejdsTimer"
-            @input="update('arbejdsTimer', $event.target.value)"
+            @input="update('arbejdsTimer', $event.target.value, true)"
             type="text"
             class="form-control text-right"
             aria-label="Beløb selskabet kan betale"
@@ -72,9 +81,9 @@
     </div>
     <div class="row bg-white mt-3">
       <div class="col">
-        <h2>Oplysninger om den ansattes skattekort</h2>
+        <h2>{{texts.UserInputEmployeeTaxInfo}}</h2>
         <fieldset>
-          <legend>skattekort</legend>
+          <legend>{{texts.UserInputTaxCard}}</legend>
           <div class="custom-control custom-radio">
             <input
               v-model="value.skattekort"
@@ -85,7 +94,7 @@
               name="skattekort"
               class="custom-control-input"
             >
-            <label class="custom-control-label" for="hovedkort">Hovedkort</label>
+            <label class="custom-control-label" for="hovedkort">{{texts.UserInputPrimaryTaxCard}}</label>
           </div>
           <div class="custom-control custom-radio">
             <input
@@ -97,20 +106,20 @@
               name="skattekort"
               class="custom-control-input"
             >
-            <label class="custom-control-label" for="bikort">Bikort</label>
+            <label class="custom-control-label" for="bikort">{{texts.UserInputSecondaryTaxCard}}</label>
           </div>
         </fieldset>
       </div>
     </div>
     <div class="row bg-white py-3">
       <div class="col d-flex align-items-center">
-        <label for="traekprocent">Trækprocent</label>
+        <label for="traekprocent">{{texts.UserInputWithholdingRate}}</label>
       </div>
       <div class="col">
         <div class="input-group">
           <input
             v-model.number="value.traekprocent"
-            @input="update('traekprocent', $event.target.value)"
+            @input="update('traekprocent', $event.target.value, true)"
             id="traekprocent"
             type="text"
             class="form-control text-right"
@@ -123,13 +132,13 @@
     </div>
     <div class="row bg-white py-3">
       <div class="col d-flex align-items-center">
-        <label for="fradrag">Fradrag</label>
+        <label for="fradrag">{{texts.UserInputDeduction}}</label>
       </div>
       <div class="col">
         <div class="input-group">
           <input
             v-model="value.fradrag"
-            @input="update('fradrag', $event.target.value)"
+            @input="update('fradrag', $event.target.value, true)"
             id="fradrag"
             type="text"
             class="form-control text-right"
@@ -156,7 +165,7 @@
 <script>
 export default {
   name: "AbleToPay",
-  props: ["value"],
+  props: ["value", "texts"],
   computed: {
     canProceed: function() {
       return this.value.selskabetBetaler &&
@@ -174,7 +183,10 @@ export default {
       e.preventDefault();
       this.$emit("changeStep", "conclusion");
     },
-    update(key, value) {
+    update(key, value, isNumber) {
+      if (isNumber) {
+        value = Number(value) || null;
+      }
       this.$emit("input", { ...this.value, [key]: value });
     }
   }
