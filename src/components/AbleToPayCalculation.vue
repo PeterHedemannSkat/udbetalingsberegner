@@ -76,73 +76,22 @@
         <button class="btn btn-primary" @click="$emit('changeStep', 'userinput')">Tilbage</button>
       </div>
     </div>
-    <Modal
-      v-if="showModal === 'payCosts'"
-      :title="texts.ResultPayCosts"
-      :text="texts.ResultPayCostExplanation"
-      v-on:close="closeModal"
-    ></Modal>
-    <Modal
-      v-if="showModal === 'atpEmployer'"
-      :title="texts.ResultATPEmployer"
-      :text="texts.ResultATPEmployerExplanation"
-      v-on:close="closeModal"
+    <ModalCollection
+      v-bind:lonForSkat="lonForSkat"
+      v-bind:atpArbejdsgiver="atpArbejdsgiver"
+      v-bind:atpMedarbejder="atpMedarbejder"
+      v-bind:amBidrag="amBidrag"
+      v-bind:fradrag="this.userInput.fradrag"
+      v-bind:aIndkomst="aIndkomst"
+      v-bind:texts="texts"
+      v-bind:showModal="showModal"
+      v-on:close="showModal=null"
     />
-    <Modal
-      v-if="showModal === 'payBeforeTaxes'"
-      :title="texts.ResultPayBeforeTaxes"
-      :text="texts.ResultPayBeforeTaxesExplanation"
-      v-on:close="closeModal"
-    />
-    <Modal
-      v-if="showModal === 'atpEmployee'"
-      :title="texts.ResultATPEmployee"
-      :text="texts.ResultATPEmployeeExplanation"
-      v-on:close="closeModal"
-    />
-    <Modal
-      v-if="showModal === 'atpEmployee'"
-      :title="texts.ResultATPEmployee"
-      :text="texts.ResultATPEmployeeExplanation"
-      v-on:close="closeModal"
-    />
-    <Modal
-      v-if="showModal === 'labourMarketContributions'"
-      :title="texts.ResultLabourMarketContributions"
-      :text="texts.ResultLabourMarketContributionsExplanation"
-      v-on:close="closeModal"
-    >
-      <div class="col-sm-8">{{texts.ResultPayBeforeTaxes}}</div>
-      <div class="col-sm-4 text-right">{{formatValuta(lonForSkat)}}</div>
-      <div class="col-sm-8">{{texts.ResultATPEmployee}}</div>
-      <div class="col-sm-4 text-right">{{formatValuta(atpMedarbejder)}}</div>
-      <hr class="w-100">
-      <div class="col-sm-8">AM grundlag</div>
-      <div class="col-sm-4 text-right">{{formatValuta(lonForSkat - atpMedarbejder)}}</div>
-    </Modal>
-    <Modal
-      v-if="showModal === 'aTax'"
-      :title="texts.ResultATax"
-      :text="texts.ResultATaxExplanation"
-      v-on:close="closeModal"
-    >
-      <div class="col-sm-8">{{texts.ResultPayBeforeTaxes}}</div>
-      <div class="col-sm-4 text-right">{{formatValuta(lonForSkat)}}</div>
-      <div class="col-sm-8">{{texts.ResultATPEmployee}}</div>
-      <div class="col-sm-4 text-right">-{{formatValuta(atpMedarbejder)}}</div>
-      <div class="col-sm-8">{{texts.ResultLabourMarketContributions}}</div>
-      <div class="col-sm-4 text-right">-{{formatValuta(amBidrag)}}</div>
-      <div class="col-sm-8">{{texts.UserInputDeduction}}</div>
-      <div class="col-sm-4 text-right">-{{formatValuta(this.userInput.fradrag)}}</div>
-      <hr class="w-100">
-      <div class="col-sm-8">{{texts.ResultAIncome}}</div>
-      <div class="col-sm-4 text-right">{{formatValuta(aIndkomst)}}</div>
-    </Modal>
   </div>
 </template>
 
 <script>
-import Modal from "./Modal";
+import ModalCollection from "./ModalCollection";
 
 export default {
   name: "AbleToPayCalculation",
@@ -151,7 +100,7 @@ export default {
       showModal: null
     };
   },
-  components: { Modal },
+  components: { ModalCollection },
   props: ["texts", "userInput", "atpMedarbejder", "atpArbejdsgiver"],
   methods: {
     formatValuta(number) {
