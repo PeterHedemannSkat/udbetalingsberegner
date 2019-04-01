@@ -1,5 +1,5 @@
 <template>
-  <form @submit="next">
+  <form @submit="next" :class="formValidated ? 'was-validated':''" novalidate>
     <div class="row bg-white py-3">
       <div class="col-12">
         <h2>{{texts.UserInputPaymentInfo}}</h2>
@@ -10,7 +10,9 @@
       <div class="col">
         <div class="input-group">
           <input
-            type="text"
+            type="number"
+            min="1"
+            required
             class="form-control text-right"
             id="udbetaltEfterSkat"
             v-model.number="value.udbetaltEfterSkat"
@@ -19,6 +21,7 @@
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
           </div>
+          <div class="invalid-feedback">PLACEHOLDER: Indtast beløbet den ansatte ønsker udbetalt</div>
         </div>
       </div>
     </div>
@@ -35,6 +38,7 @@
               name="frequency"
               value="maanedlig"
               class="custom-control-input"
+              required
             >
             <label
               class="custom-control-label"
@@ -50,11 +54,13 @@
               name="frequency"
               value="fjortendage"
               class="custom-control-input"
+              required
             >
             <label
               class="custom-control-label"
               for="fjortendage"
             >{{texts.UserInputPaymentFrequency14Days}}</label>
+            <div class="invalid-feedback">PLACEHOLDER: Du skal vælge en lønperiode</div>
           </div>
         </fieldset>
       </div>
@@ -68,13 +74,16 @@
           <input
             v-model.number="value.arbejdsTimer"
             @input="update('arbejdsTimer', $event.target.value, true)"
-            type="text"
+            type="number"
+            required
+            min="1"
             class="form-control text-right"
-            aria-label="Beløb selskabet kan betale"
+            aria-label="Antal timer den ansatte arbejder i lønperioden"
           >
           <div class="input-group-append">
             <span class="input-group-text">timer</span>
           </div>
+          <div class="invalid-feedback">PLACEHOLDER: Indtast et tal over 0</div>
         </div>
       </div>
     </div>
@@ -92,6 +101,7 @@
               value="hovedkort"
               name="skattekort"
               class="custom-control-input"
+              required
             >
             <label class="custom-control-label" for="hovedkort">{{texts.UserInputPrimaryTaxCard}}</label>
           </div>
@@ -104,8 +114,10 @@
               value="bikort"
               name="skattekort"
               class="custom-control-input"
+              required
             >
             <label class="custom-control-label" for="bikort">{{texts.UserInputSecondaryTaxCard}}</label>
+            <div class="invalid-feedback">PLACEHOLDER: Du skal vælge en skattekortstype</div>
           </div>
         </fieldset>
       </div>
@@ -120,12 +132,15 @@
             v-model.number="value.traekprocent"
             @input="update('traekprocent', $event.target.value, true)"
             id="traekprocent"
-            type="text"
+            type="number"
+            min="1"
+            required
             class="form-control text-right"
           >
           <div class="input-group-append">
             <span class="input-group-text">%</span>
           </div>
+          <div class="invalid-feedback">PLACEHOLDER: Indtast et tal over 0</div>
         </div>
       </div>
     </div>
@@ -139,12 +154,15 @@
             v-model="value.fradrag"
             @input="update('fradrag', $event.target.value, true)"
             id="fradrag"
-            type="text"
+            type="number"
+            min="0"
+            required
             class="form-control text-right"
           >
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
           </div>
+          <div class="invalid-feedback">PLACEHOLDER: Indtast et beløb over 0</div>
         </div>
       </div>
     </div>
@@ -155,7 +173,7 @@
           class="btn btn-primary"
           @click="$emit('changeStep', 'selection')"
         >Tilbage</button>
-        <button type="submit" :disabled="!canProceed" class="btn btn-primary">Næste</button>
+        <button type="submit" class="btn btn-primary">Næste</button>
       </div>
     </div>
   </form>
@@ -165,22 +183,18 @@
 export default {
   name: "EmployeeWants",
   props: ["value", "texts"],
-  computed: {
-    canProceed() {
-      return this.value.udbetaltEfterSkat &&
-        this.value.udbetalingsFrekvens &&
-        this.value.arbejdsTimer &&
-        this.value.skattekort &&
-        this.value.traekprocent &&
-        this.value.fradrag
-        ? true
-        : false;
-    }
+  data() {
+    return { formValidated: false };
   },
+  computed: {},
   methods: {
     next(e) {
       e.preventDefault();
-      this.$emit("changeStep", "conclusion");
+      if (e.target.checkValidity()) {
+        this.$emit("changeStep", "conclusion");
+      } else {
+        this.formValidated = true;
+      }
     },
     update(key, value, isNumber) {
       if (isNumber) {
