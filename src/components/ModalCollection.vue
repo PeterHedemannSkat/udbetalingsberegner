@@ -25,12 +25,6 @@
       v-on:close="$emit('close')"
     />
     <Modal
-      v-if="showModal === 'atpEmployee'"
-      :title="texts.ResultATPEmployee"
-      :text="texts.ResultATPEmployeeExplanation"
-      v-on:close="$emit('close')"
-    />
-    <Modal
       v-if="showModal === 'labourMarketContributions'"
       :title="texts.ResultLabourMarketContributions"
       :text="texts.ResultLabourMarketContributionsExplanation"
