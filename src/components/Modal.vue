@@ -38,12 +38,17 @@ export default {
   props: ["title", "text"],
   data() {
     return {
-      addShow: false
+      addShow: false,
+      scrollTop: null
     };
   },
   created() {
+    let scrollTop = document.documentElement.scrollTop;
     this.$nextTick(function() {
       this.addShow = true;
+      window.requestAnimationFrame(function() {
+        document.documentElement.scrollTo({ top: scrollTop });
+      });
     });
   }
 };
