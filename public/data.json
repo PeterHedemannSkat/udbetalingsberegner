@@ -264,5 +264,84 @@
         "Hjælpetekst": "<p>A-skatten bliver beregnet ud fra A-indkomsten, som er lønnen før skat fratrukket den ansattes ATP-bidrag, am-bidraget og den ansattes fradrag.</p>"
       }
     ]
+  },
+  {
+    "oid": "15014",
+    "id": "119287",
+    "application": "ATP Rater",
+    "children": [
+      {
+        "oid": "15016",
+        "id": "fjortendage",
+        "lvl": "1",
+        "description": "14 dage",
+        "children": [
+          {
+            "oid": "15021",
+            "id": "120426",
+            "lvl": "2",
+            "description": "Minimum 54 timer",
+            "da": "min:54,medarbejder:49.8,arbejdsgiver:99.6"
+          },
+          {
+            "oid": "15022",
+            "id": "120447",
+            "lvl": "2",
+            "description": "Minimum 36 timer",
+            "da": "min:36,medarbejder:33.2,arbejdsgiver:66.4"
+          },
+          {
+            "oid": "15023",
+            "id": "120591",
+            "lvl": "2",
+            "description": "Minimum 18 timer",
+            "da": "min:18,medarbejder:16.6,arbejdsgiver:33.2"
+          },
+          {
+            "oid": "15024",
+            "id": "120608",
+            "lvl": "2",
+            "description": "Minimum 0 timer",
+            "da": "min:0,medarbejder:0,arbejdsgiver:0"
+          }
+        ]
+      },
+      {
+        "oid": "15015",
+        "id": "maanedlig",
+        "lvl": "1",
+        "description": "Måned",
+        "children": [
+          {
+            "oid": "15017",
+            "id": "119494",
+            "lvl": "2",
+            "description": "Minimum 117 timer",
+            "da": "min:117,medarbejder:94.65,arbejdsgiver:189.35"
+          },
+          {
+            "oid": "15018",
+            "id": "119713",
+            "lvl": "2",
+            "description": "Minimum 78 timer",
+            "da": "min:78,medarbejder:63.1,arbejdsgiver:126.25"
+          },
+          {
+            "oid": "15019",
+            "id": "119715",
+            "lvl": "2",
+            "description": "Minimum 39 timer",
+            "da": "min:39,medarbejder:31.55,arbejdsgiver:63.1"
+          },
+          {
+            "oid": "15020",
+            "id": "119874",
+            "lvl": "2",
+            "description": "Minimum 0 timer",
+            "da": "min:0,medarbejder:0,arbejdsgiver:0"
+          }
+        ]
+      }
+    ]
   }
 ]

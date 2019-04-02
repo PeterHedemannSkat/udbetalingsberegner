@@ -67,45 +67,8 @@ export default {
       },
       texts: {},
       ATPRates: {
-        maanedlig: [
-          {
-            min: 117,
-            medarbejder: 94.65,
-            arbejdsgiver: 189.35
-          },
-          {
-            min: 78,
-            medarbejder: 63.1,
-            arbejdsgiver: 126.25
-          },
-          {
-            min: 39,
-            medarbejder: 31.55,
-            arbejdsgiver: 63.1
-          },
-          {
-            min: 0,
-            medarbejder: 0,
-            arbejdsgiver: 0
-          }
-        ],
-        fjortendage: [
-          {
-            min: 54,
-            medarbejder: 49.8,
-            arbejdsgiver: 99.6
-          },
-          {
-            min: 36,
-            medarbejder: 33.2,
-            arbejdsgiver: 66.4
-          },
-          {
-            min: 18,
-            medarbejder: 16.6,
-            arbejdsgiver: 33.2
-          }
-        ]
+        maanedlig: [],
+        fjortendage: []
       }
     };
   },
@@ -174,6 +137,24 @@ export default {
         });
         _this.texts = texts;
         _this.step = "selection";
+
+        let atpRates = {
+          maanedlig: [],
+          fjortendage: []
+        };
+
+        // Konverterer ATP rater json data fra DAP om til et mere fornuftigt format
+        data[1].children.forEach(periode => {
+          periode.children.forEach(rate => {
+            let o = {};
+            rate.da.split(",").forEach(property => {
+              let [key, value] = property.split(":");
+              o[key] = Number(value);
+            });
+            atpRates[periode.id].push(o);
+          });
+        });
+        _this.ATPRates = atpRates;
       },
       dataType: "JSON"
     });
