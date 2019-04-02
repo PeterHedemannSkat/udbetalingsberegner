@@ -146,7 +146,11 @@ export default {
       return rate ? rate.medarbejder : null;
     },
     activeStep() {
-      return this.step === "selection" ? 1 : this.step === "userinput" ? 2 : 3;
+      return this.step === "loading" || this.step === "selection"
+        ? 1
+        : this.step === "userinput"
+        ? 2
+        : 3;
     }
   },
   created() {
@@ -178,4 +182,7 @@ export default {
 </script>
 
 <style>
+body.modal-open {
+  overflow: visible;
+}
 </style>
