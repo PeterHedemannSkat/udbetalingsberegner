@@ -57,13 +57,13 @@ export default {
       step: "loading",
       userInput: {
         selection: null,
-        selskabetBetaler: 25187,
-        udbetaltEfterSkat: 20000,
-        udbetalingsFrekvens: "maanedlig",
-        skattekort: "hovedkort",
-        arbejdsTimer: 160,
-        traekprocent: 36,
-        fradrag: 6800
+        selskabetBetaler: null,
+        udbetaltEfterSkat: null,
+        udbetalingsFrekvens: null,
+        skattekort: null,
+        arbejdsTimer: null,
+        traekprocent: null,
+        fradrag: null
       },
       texts: {},
       ATPRates: {
