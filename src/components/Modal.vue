@@ -4,7 +4,7 @@
     v-bind:class="addShow ? 'show' : ''"
     tabindex="-1"
     role="dialog"
-    style="display:block; background-color: rgb(100,100,100,0.5);"
+    style="display:block; background-color: rgba(25,25,25,0.5)"
     @click="$emit('close')"
   >
     <div class="modal-dialog" role="document" @click="e => e.stopPropagation()">
@@ -47,7 +47,7 @@ export default {
     this.$nextTick(function() {
       this.addShow = true;
       window.requestAnimationFrame(function() {
-        document.documentElement.scrollTo({ top: scrollTop });
+        window.scrollTo(0, scrollTop);
       });
     });
   }
