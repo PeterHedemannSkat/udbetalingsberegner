@@ -5,7 +5,7 @@
       "id": "111229",
       "oid": "13508",
       "application": "Udbetalingsberegner",
-      "version": "version 95.1 - onepage fix",
+      "version": "version 95.7 - datatable order default",
       "system": "Intra/inter-net peter"
     },
     "oid": "13511",
@@ -262,6 +262,41 @@
         "description": "Resultat - Forklaring af A-skat",
         "da": "Forklaring af A-skat",
         "Hjælpetekst": "<p>A-skatten bliver beregnet ud fra A-indkomsten, som er lønnen før skat fratrukket den ansattes ATP-bidrag, am-bidraget og den ansattes fradrag.</p>"
+      },
+      {
+        "oid": "16011",
+        "id": "ErrorAmmountHigherThanZero",
+        "lvl": "1",
+        "description": "Fejl - Indtast beløb over 0 kr.",
+        "da": "Indtast beløb over 0 kr."
+      },
+      {
+        "oid": "16012",
+        "id": "ErrorNumberHigherThanZero",
+        "lvl": "1",
+        "description": "Fejl - Indtast et tal der er større end nul",
+        "da": "Indtast et tal der er større end nul"
+      },
+      {
+        "oid": "16013",
+        "id": "ErrorChooseTaxCard",
+        "lvl": "1",
+        "description": "Fejl - Vælg en skattekortstype",
+        "da": "Vælg en skattekortstype"
+      },
+      {
+        "oid": "16014",
+        "id": "ErrorWithholdingRate",
+        "lvl": "1",
+        "description": "Fejl - Indtast et tal mellem 25 og 55",
+        "da": "Indtast et tal mellem 25 og 55"
+      },
+      {
+        "oid": "16015",
+        "id": "ErrorChoosePayPeriod",
+        "lvl": "1",
+        "description": "Fejl - Du skal vælge en lønperiode",
+        "da": "Du skal vælge en lønperiode"
       }
     ]
   },
