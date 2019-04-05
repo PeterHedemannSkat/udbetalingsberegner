@@ -81,7 +81,7 @@
       v-bind:atpArbejdsgiver="atpArbejdsgiver"
       v-bind:atpMedarbejder="atpMedarbejder"
       v-bind:amBidrag="amBidrag"
-      v-bind:fradrag="this.userInput.fradrag"
+      v-bind:fradrag="this.fradrag(this.userInput)"
       v-bind:aIndkomst="aIndkomst"
       v-bind:texts="texts"
       v-bind:showModal="showModal"
@@ -91,6 +91,7 @@
 </template>
 <script>
 import ModalCollection from "./ModalCollection";
+import { formatValuta, fradrag } from "../helpers";
 
 export default {
   name: "EmployeeWantsCalculation",
@@ -102,40 +103,33 @@ export default {
     };
   },
   methods: {
-    formatValuta(number) {
-      // const roundedNumber = Math.round(number * 100) / 100;
-      number = Number(number);
-
-      return (
-        number.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) + " kr."
-      );
-    },
-    fradrag() {
-      return this.userInput.skattekort === "hovedkort"
-        ? this.userInput.fradrag
-        : 0;
-    }
+    formatValuta,
+    fradrag
   },
   computed: {
     aSkat() {
       return (
-        ((this.userInput.udbetaltEfterSkat - this.fradrag()) /
+        ((this.userInput.udbetaltEfterSkat - this.fradrag(this.userInput)) /
           (100 - this.userInput.traekprocent)) *
         this.userInput.traekprocent
       );
     },
     aIndkomst() {
-      return this.userInput.udbetaltEfterSkat - this.fradrag() + this.aSkat;
+      return (
+        this.userInput.udbetaltEfterSkat -
+        this.fradrag(this.userInput) +
+        this.aSkat
+      );
     },
     amBidrag() {
-      return ((this.aIndkomst + this.fradrag()) / 92) * 8;
+      return ((this.aIndkomst + this.fradrag(this.userInput)) / 92) * 8;
     },
     lonForSkat() {
       return (
-        this.aIndkomst + this.atpMedarbejder + this.amBidrag + this.fradrag()
+        this.aIndkomst +
+        this.atpMedarbejder +
+        this.amBidrag +
+        this.fradrag(this.userInput)
       );
     },
     selskabetSkalBetale() {

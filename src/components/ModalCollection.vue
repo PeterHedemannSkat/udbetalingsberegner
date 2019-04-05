@@ -61,6 +61,8 @@
 
 <script>
 import Modal from "./Modal";
+import { formatValuta } from "../helpers.js";
+
 export default {
   name: "ModalCollection",
   props: [
@@ -75,15 +77,7 @@ export default {
   ],
   components: { Modal },
   methods: {
-    formatValuta(number) {
-      number = Number(number);
-      return (
-        number.toLocaleString("da-DK", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) + " kr."
-      );
-    }
+    formatValuta
   }
 };
 </script>

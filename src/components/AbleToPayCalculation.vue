@@ -81,7 +81,7 @@
       v-bind:atpArbejdsgiver="atpArbejdsgiver"
       v-bind:atpMedarbejder="atpMedarbejder"
       v-bind:amBidrag="amBidrag"
-      v-bind:fradrag="this.userInput.fradrag"
+      v-bind:fradrag="fradrag(this.userInput)"
       v-bind:aIndkomst="aIndkomst"
       v-bind:texts="texts"
       v-bind:showModal="showModal"
@@ -92,6 +92,7 @@
 
 <script>
 import ModalCollection from "./ModalCollection";
+import { formatValuta, fradrag } from "../helpers";
 
 export default {
   name: "AbleToPayCalculation",
@@ -103,18 +104,8 @@ export default {
   components: { ModalCollection },
   props: ["texts", "userInput", "atpMedarbejder", "atpArbejdsgiver"],
   methods: {
-    formatValuta(number) {
-      number = Number(number);
-      return (
-        number.toLocaleString("da-DK", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) + " kr."
-      );
-    },
-    closeModal() {
-      this.showModal = null;
-    }
+    formatValuta,
+    fradrag
   },
   created() {},
   computed: {
@@ -129,13 +120,9 @@ export default {
       return (this.lonForSkat - this.atpMedarbejder) * 0.08;
     },
     aIndkomst() {
-      const { skattekort, fradrag } = this.userInput;
       const { lonForSkat, atpMedarbejder, amBidrag } = this;
       const aIndkomst =
-        lonForSkat -
-        atpMedarbejder -
-        amBidrag -
-        (skattekort === "hovedkort" ? fradrag : 0);
+        lonForSkat - atpMedarbejder - amBidrag - fradrag(this.userInput);
 
       return aIndkomst > 0 ? aIndkomst : 0;
     },
