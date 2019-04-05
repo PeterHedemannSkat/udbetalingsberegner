@@ -21,7 +21,7 @@
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
           </div>
-          <div class="invalid-feedback">PLACEHOLDER: Indtast beløbet den ansatte ønsker udbetalt</div>
+          <div class="invalid-feedback">{{texts.ErrorAmmountHigherThanZero}}</div>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
               class="custom-control-label"
               for="fjortendage"
             >{{texts.UserInputPaymentFrequency14Days}}</label>
-            <div class="invalid-feedback">PLACEHOLDER: Du skal vælge en lønperiode</div>
+            <div class="invalid-feedback">{{texts.ErrorChoosePayPeriod}}</div>
           </div>
         </fieldset>
       </div>
@@ -83,7 +83,7 @@
           <div class="input-group-append">
             <span class="input-group-text">timer</span>
           </div>
-          <div class="invalid-feedback">PLACEHOLDER: Indtast et tal over 0</div>
+          <div class="invalid-feedback">{{texts.ErrorNumberHigherThanZero}}</div>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@
               required
             >
             <label class="custom-control-label" for="bikort">{{texts.UserInputSecondaryTaxCard}}</label>
-            <div class="invalid-feedback">PLACEHOLDER: Du skal vælge en skattekortstype</div>
+            <div class="invalid-feedback">{{texts.ErrorChooseTaxCard}}</div>
           </div>
         </fieldset>
       </div>
@@ -140,7 +140,7 @@
           <div class="input-group-append">
             <span class="input-group-text">%</span>
           </div>
-          <div class="invalid-feedback">PLACEHOLDER: Indtast et tal over 0</div>
+          <div class="invalid-feedback">{{texts.ErrorWithholdingRate}}</div>
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
           </div>
-          <div class="invalid-feedback">PLACEHOLDER: Indtast et beløb over 0</div>
+          <div class="invalid-feedback">{{texts.ErrorAmmountHigherThanZero}}</div>
         </div>
       </div>
     </div>
