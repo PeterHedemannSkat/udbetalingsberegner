@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapState, mapMutations } from "vuex";
 
 import Loading from "./components/Loading";
 import Selection from "./components/Selection";
@@ -56,7 +56,7 @@ export default {
     EmployeeWantsCalculation
   },
   methods: {
-    ...mapActions(["setTexts", "setATPRates", "changeStep"])
+    ...mapMutations(["setTexts", "setATPRates", "changeStep"])
   },
   computed: {
     ...mapState(["step", "texts", "selection"]),

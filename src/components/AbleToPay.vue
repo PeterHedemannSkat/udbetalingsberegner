@@ -170,7 +170,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   name: "AbleToPay",
   data() {
@@ -234,8 +234,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["changeStep"]),
-    ...mapMutations(["setValue", "setNumber"]),
+    ...mapMutations(["setValue", "setNumber", "changeStep"]),
     next(e) {
       e.preventDefault();
       if (e.target.checkValidity()) {

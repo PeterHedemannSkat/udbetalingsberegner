@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   name: "EmployeeWants",
   props: ["value", "texts"],
@@ -230,8 +230,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["changeStep"]),
-    ...mapMutations(["setValue", "setNumber"]),
+    ...mapMutations(["setValue", "setNumber", "changeStep"]),
     next(e) {
       e.preventDefault();
       if (e.target.checkValidity()) {

@@ -133,20 +133,7 @@ const store = new Vuex.Store({
       return rate ? rate.medarbejder : null;
     }
   },
-  actions: {
-    changeStep({ commit }, step) {
-      commit("changeStep", step);
-    },
-    setTexts({ commit }, texts) {
-      commit("setTexts", texts);
-    },
-    setATPRates({ commit }, rates) {
-      commit("setATPRates", rates);
-    },
-    setSelection({ commit }, selection) {
-      commit("setSelection", selection);
-    }
-  },
+  actions: {},
   mutations: {
     changeStep(state, step) {
       state.step = step;

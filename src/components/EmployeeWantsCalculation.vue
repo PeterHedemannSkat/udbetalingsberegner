@@ -82,7 +82,7 @@
 <script>
 import ModalCollection from "./ModalCollection";
 import { formatValuta } from "../helpers";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "EmployeeWantsCalculation",
@@ -94,12 +94,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["changeStep"]),
+    ...mapMutations(["changeStep"]),
     formatValuta
   },
   computed: {
     ...mapGetters([
-      "udbetaltEfterSkat",
       "traekprocent",
       "beregnetFradrag",
       "aSkat",

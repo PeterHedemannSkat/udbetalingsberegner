@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "Selection",
   computed: {
@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setSelection", "changeStep"]),
+    ...mapMutations(["setSelection", "changeStep"]),
     next(e) {
       e.preventDefault();
       this.changeStep("userinput");
