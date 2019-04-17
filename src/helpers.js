@@ -7,13 +7,3 @@ export function formatValuta(number) {
     }) + " kr."
   );
 }
-
-export function fradrag(skattekort, fradrag, udbetalingsFrekvens) {
-  let reeltfradrag = skattekort === "hovedkort" ? fradrag : 0;
-
-  if (udbetalingsFrekvens === "fjortendage") {
-    reeltfradrag = reeltfradrag * 0.4615;
-  }
-
-  return reeltfradrag;
-}

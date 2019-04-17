@@ -82,7 +82,7 @@
 
 <script>
 import ModalCollection from "./ModalCollection";
-import { formatValuta, fradrag } from "../helpers";
+import { formatValuta } from "../helpers";
 import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -96,8 +96,7 @@ export default {
   components: { ModalCollection },
   methods: {
     ...mapMutations(["changeStep"]),
-    formatValuta,
-    fradrag
+    formatValuta
   },
   created() {},
   computed: {
