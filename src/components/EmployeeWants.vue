@@ -15,7 +15,9 @@
             required
             class="form-control text-right"
             id="udbetaltEfterSkat"
-            v-model.number="udbetaltEfterSkat"
+            name="udbetaltEfterSkat"
+            :value="udbetaltEfterSkat"
+            @input="onInput"
           >
           <div class="input-group-append">
             <span class="input-group-text">kr.</span>
@@ -30,11 +32,12 @@
           <legend>{{texts.UserInputPaymentFrequency}}</legend>
           <div class="custom-control custom-radio">
             <input
-              v-model="udbetalingsFrekvens"
+              value="maanedlig"
+              :checked="udbetalingsFrekvens === 'maanedlig'"
+              @input="onInput"
               type="radio"
               id="maanedlig"
-              name="frequency"
-              value="maanedlig"
+              name="udbetalingsFrekvens"
               class="custom-control-input"
               required
             >
@@ -45,11 +48,12 @@
           </div>
           <div class="custom-control custom-radio">
             <input
-              v-model="udbetalingsFrekvens"
+              value="fjortendage"
+              :checked="udbetalingsFrekvens === 'fjortendage'"
+              @input="onInput"
               type="radio"
               id="fjortendage"
-              name="frequency"
-              value="fjortendage"
+              name="udbetalingsFrekvens"
               class="custom-control-input"
               required
             >
@@ -69,7 +73,9 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model.number="arbejdsTimer"
+            :value="arbejdsTimer"
+            name="arbejdsTimer"
+            @input="onInput"
             type="number"
             required
             min="1"
@@ -90,9 +96,10 @@
           <legend>{{texts.UserInputTaxCard}}</legend>
           <div class="custom-control custom-radio">
             <input
-              v-model="skattekort"
+              @input="onInput"
               type="radio"
               id="hovedkort"
+              :checked="skattekort === 'hovedkort'"
               value="hovedkort"
               name="skattekort"
               class="custom-control-input"
@@ -102,9 +109,10 @@
           </div>
           <div class="custom-control custom-radio">
             <input
-              v-model="skattekort"
+              @input="onInput"
               type="radio"
               id="bikort"
+              :checked="skattekort === 'bikort'"
               value="bikort"
               name="skattekort"
               class="custom-control-input"
@@ -123,8 +131,10 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model.number="traekprocent"
+            :value="traekprocent"
+            @input="onInput"
             id="traekprocent"
+            name="traekprocent"
             type="number"
             min="1"
             required
@@ -144,8 +154,10 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model="fradrag"
+            :value="fradrag"
+            @input="onInput"
             id="fradrag"
+            name="fradrag"
             type="number"
             min="0"
             required
@@ -168,67 +180,21 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "EmployeeWants",
   props: ["value", "texts"],
   data() {
     return { formValidated: false };
   },
-  computed: {
-    udbetaltEfterSkat: {
-      get() {
-        return this.$store.state.udbetaltEfterSkat;
-      },
-      set(value) {
-        value = Number(value) || null;
-        this.setNumber({ field: "udbetaltEfterSkat", value });
-      }
-    },
-    udbetalingsFrekvens: {
-      get() {
-        return this.$store.state.udbetalingsFrekvens;
-      },
-      set(value) {
-        this.setValue({ field: "udbetalingsFrekvens", value });
-      }
-    },
-    arbejdsTimer: {
-      get() {
-        return this.$store.state.arbejdsTimer;
-      },
-      set(value) {
-        value = Number(value) || null;
-        this.setNumber({ field: "arbejdsTimer", value });
-      }
-    },
-    skattekort: {
-      get() {
-        return this.$store.state.skattekort;
-      },
-      set(value) {
-        this.setValue({ field: "skattekort", value });
-      }
-    },
-    traekprocent: {
-      get() {
-        return this.$store.state.traekprocent;
-      },
-      set(value) {
-        value = Number(value) || null;
-        this.setNumber({ field: "traekprocent", value });
-      }
-    },
-    fradrag: {
-      get() {
-        return this.$store.state.fradrag;
-      },
-      set(value) {
-        value = Number(value) || null;
-        this.setNumber({ field: "fradrag", value });
-      }
-    }
-  },
+  computed: mapState([
+    "udbetaltEfterSkat",
+    "udbetalingsFrekvens",
+    "arbejdsTimer",
+    "skattekort",
+    "traekprocent",
+    "fradrag"
+  ]),
   methods: {
     ...mapMutations(["setValue", "setNumber", "changeStep"]),
     next(e) {
@@ -237,6 +203,18 @@ export default {
         this.changeStep("conclusion");
       } else {
         this.formValidated = true;
+      }
+    },
+    onInput(e) {
+      const { name, value, type, id } = e.target;
+
+      switch (type) {
+        case "number":
+          this.setNumber({ field: name, value });
+          break;
+        case "radio":
+          this.setValue({ field: name, value: id });
+          break;
       }
     }
   }
