@@ -8,7 +8,7 @@ export function formatValuta(number) {
   );
 }
 
-export function fradrag({ skattekort, fradrag, udbetalingsFrekvens }) {
+export function fradrag(skattekort, fradrag, udbetalingsFrekvens) {
   let reeltfradrag = skattekort === "hovedkort" ? fradrag : 0;
 
   if (udbetalingsFrekvens === "fjortendage") {

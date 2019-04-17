@@ -3,45 +3,21 @@
     <div class="col pt-3">
       <ProgressBar :stepCount="3" :activeStep="activeStep"/>
       <Loading v-if="step === 'loading'"/>
-      <Selection
-        v-if="step === 'selection'"
-        v-model="userInput"
-        v-on:changeStep="changeStep"
-        :texts="texts"
-      />
-      <AbleToPay
-        v-if="step === 'userinput' && userInput.selection === 'able'"
-        v-model="userInput"
-        :texts="texts"
-        v-on:changeStep="changeStep"
-      />
-      <AbleToPayCalculation
-        v-if="step === 'conclusion' && userInput.selection === 'able'"
-        :texts="texts"
-        :userInput="userInput"
-        :atpMedarbejder="atpMedarbejder"
-        :atpArbejdsgiver="atpArbejdsgiver"
-        v-on:changeStep="changeStep"
-      />
-      <EmployeeWants
-        v-if="step === 'userinput' && userInput.selection === 'want'"
-        :texts="texts"
-        v-model="userInput"
-        v-on:changeStep="changeStep"
-      />
+      <Selection v-if="step === 'selection'"/>
+      <AbleToPay v-if="step === 'userinput' && selection === 'able'" :texts="texts"/>
+      <AbleToPayCalculation v-if="step === 'conclusion' && selection === 'able'" :texts="texts"/>
+      <EmployeeWants v-if="step === 'userinput' && selection === 'want'" :texts="texts"/>
       <EmployeeWantsCalculation
-        v-if="step === 'conclusion' && userInput.selection === 'want'"
+        v-if="step === 'conclusion' && selection === 'want'"
         :texts="texts"
-        :userInput="userInput"
-        :atpMedarbejder="atpMedarbejder"
-        :atpArbejdsgiver="atpArbejdsgiver"
-        v-on:changeStep="changeStep"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions, mapState } from "vuex";
+
 import Loading from "./components/Loading";
 import Selection from "./components/Selection";
 import AbleToPay from "./components/AbleToPay";
@@ -54,7 +30,6 @@ export default {
   name: "app",
   data() {
     return {
-      step: "loading",
       userInput: {
         selection: null,
         selskabetBetaler: null,
@@ -65,7 +40,6 @@ export default {
         traekprocent: null,
         fradrag: null
       },
-      texts: {},
       ATPRates: {
         maanedlig: [],
         fjortendage: []
@@ -82,42 +56,14 @@ export default {
     EmployeeWantsCalculation
   },
   methods: {
-    changeStep(step) {
-      this.step = step;
-    },
-    atpRate() {
-      if (!this.userInput.arbejdsTimer || !this.userInput.udbetalingsFrekvens) {
-        return null;
-      }
-
-      if (!this.ATPRates[this.userInput.udbetalingsFrekvens]) {
-        return null;
-      }
-
-      return this.ATPRates[this.userInput.udbetalingsFrekvens].find(
-        rate => rate.min <= this.userInput.arbejdsTimer
-      );
-    }
+    ...mapActions(["setTexts", "setATPRates", "changeStep"])
   },
   computed: {
-    atpArbejdsgiver() {
-      let rate = this.atpRate();
-      return rate ? rate.arbejdsgiver : null;
-    },
-    atpMedarbejder() {
-      let rate = this.atpRate();
-      return rate ? rate.medarbejder : null;
-    },
-    activeStep() {
-      return this.step === "loading" || this.step === "selection"
-        ? 1
-        : this.step === "userinput"
-        ? 2
-        : 3;
-    }
+    ...mapState(["step", "texts", "selection"]),
+    ...mapGetters(["activeStep"])
   },
   created() {
-    let _this = this;
+    const { setTexts, setATPRates, changeStep } = this;
     let url =
       document.location.hostname === "localhost"
         ? "data.json"
@@ -135,8 +81,8 @@ export default {
         data[0].children.forEach(text => {
           texts[text.id] = text.da;
         });
-        _this.texts = texts;
-        _this.step = "selection";
+        setTexts(texts);
+        changeStep("selection");
 
         let atpRates = {
           maanedlig: [],
@@ -154,7 +100,7 @@ export default {
             atpRates[periode.id].push(o);
           });
         });
-        _this.ATPRates = atpRates;
+        setATPRates(atpRates);
       },
       dataType: "JSON"
     });

@@ -5,8 +5,7 @@
         <h2>{{texts.SelectionChooseCalculation}}</h2>
         <div class="custom-control custom-radio">
           <input
-            v-model="value.selection"
-            @input="update('selection', $event.target.value)"
+            v-model="selection"
             type="radio"
             id="able2pay"
             value="able"
@@ -17,8 +16,7 @@
         </div>
         <div class="custom-control custom-radio">
           <input
-            v-model="value.selection"
-            @input="update('selection', $event.target.value)"
+            v-model="selection"
             type="radio"
             id="employeewant"
             value="want"
@@ -31,23 +29,32 @@
     </div>
     <div class="row bg-white mt-3 py-3">
       <div class="col d-flex justify-content-end">
-        <button class="btn btn-primary" :disabled="!value.selection" type="submit">Næste</button>
+        <button class="btn btn-primary" :disabled="selection === null" type="submit">Næste</button>
       </div>
     </div>
   </form>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Selection",
-  props: ["value", "texts"],
+  computed: {
+    ...mapState(["texts"]),
+    selection: {
+      get() {
+        return this.$store.state.selection;
+      },
+      set(value) {
+        this.setSelection(value);
+      }
+    }
+  },
   methods: {
+    ...mapActions(["setSelection", "changeStep"]),
     next(e) {
       e.preventDefault();
-      this.$emit("changeStep", "userinput");
-    },
-    update(key, value) {
-      this.$emit("input", { ...this.value, [key]: value });
+      this.changeStep("userinput");
     }
   }
 };

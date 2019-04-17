@@ -3,7 +3,7 @@
     <div class="row text-center bg-white">
       <div class="col">
         <h2>{{texts.ResultIfEmployeeGets}}</h2>
-        <p>{{formatValuta(userInput.udbetaltEfterSkat)}}</p>
+        <p>{{formatValuta(udbetaltEfterSkat)}}</p>
         <h2>{{texts.ResultCompanyHasToPay}}</h2>
         <p>{{formatValuta(selskabetSkalBetale)}}</p>
       </div>
@@ -57,7 +57,7 @@
       </div>
       <div class="col-4 text-right">-{{formatValuta(amBidrag)}}</div>
       <div class="col-8">
-        {{texts.ResultATax}} ({{userInput.traekprocent}}% af {{formatValuta(aIndkomst)}})
+        {{texts.ResultATax}} ({{traekprocent}}% af {{formatValuta(aIndkomst)}})
         <a
           href="#"
           @click="showModal = 'aTax'"
@@ -69,11 +69,11 @@
         <hr>
       </div>
       <div class="col-8">{{texts.ResultPayOut}}</div>
-      <div class="col-4 text-right">{{formatValuta(userInput.udbetaltEfterSkat)}}</div>
+      <div class="col-4 text-right">{{formatValuta(udbetaltEfterSkat)}}</div>
     </div>
     <div class="row bg-white py-3 mt-3">
       <div class="col">
-        <button class="btn btn-primary" @click="$emit('changeStep', 'userinput')">Tilbage</button>
+        <button class="btn btn-primary" @click="changeStep('userinput')">Tilbage</button>
       </div>
     </div>
     <ModalCollection
@@ -81,7 +81,7 @@
       v-bind:atpArbejdsgiver="atpArbejdsgiver"
       v-bind:atpMedarbejder="atpMedarbejder"
       v-bind:amBidrag="amBidrag"
-      v-bind:fradrag="this.fradrag(this.userInput)"
+      v-bind:fradrag="beregnetFradrag"
       v-bind:aIndkomst="aIndkomst"
       v-bind:texts="texts"
       v-bind:showModal="showModal"
@@ -92,6 +92,7 @@
 <script>
 import ModalCollection from "./ModalCollection";
 import { formatValuta, fradrag } from "../helpers";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "EmployeeWantsCalculation",
@@ -103,44 +104,24 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["changeStep"]),
     formatValuta,
     fradrag
   },
   computed: {
-    aSkat() {
-      return (
-        ((this.userInput.udbetaltEfterSkat - this.fradrag(this.userInput)) /
-          (100 - this.userInput.traekprocent)) *
-        this.userInput.traekprocent
-      );
-    },
-    aIndkomst() {
-      return (
-        this.userInput.udbetaltEfterSkat -
-        this.fradrag(this.userInput) +
-        this.aSkat
-      );
-    },
-    amBidrag() {
-      return ((this.aIndkomst + this.fradrag(this.userInput)) / 92) * 8;
-    },
-    lonForSkat() {
-      return (
-        this.aIndkomst +
-        this.atpMedarbejder +
-        this.amBidrag +
-        this.fradrag(this.userInput)
-      );
-    },
-    selskabetSkalBetale() {
-      return (
-        Number(this.userInput.udbetaltEfterSkat) +
-        this.atpMedarbejder +
-        this.atpArbejdsgiver +
-        this.amBidrag +
-        this.aSkat
-      );
-    }
+    ...mapGetters([
+      "udbetaltEfterSkat",
+      "traekprocent",
+      "beregnetFradrag",
+      "aSkat",
+      "aIndkomst",
+      "amBidrag",
+      "lonForSkat",
+      "selskabetSkalBetale",
+      "atpMedarbejder",
+      "atpArbejdsgiver"
+    ]),
+    ...mapState(["traekprocent", "udbetaltEfterSkat"])
   }
 };
 </script>
