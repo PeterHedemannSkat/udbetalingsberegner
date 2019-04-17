@@ -76,17 +76,7 @@
         <button class="btn btn-primary" @click="changeStep('userinput')">Tilbage</button>
       </div>
     </div>
-    <ModalCollection
-      v-bind:lonForSkat="lonForSkat"
-      v-bind:atpArbejdsgiver="atpArbejdsgiver"
-      v-bind:atpMedarbejder="atpMedarbejder"
-      v-bind:amBidrag="amBidrag"
-      v-bind:fradrag="beregnetFradrag"
-      v-bind:aIndkomst="aIndkomst"
-      v-bind:texts="texts"
-      v-bind:showModal="showModal"
-      v-on:close="showModal=null"
-    />
+    <ModalCollection v-on:close="showModal=null" v-bind:showModal="showModal"/>
   </div>
 </template>
 
