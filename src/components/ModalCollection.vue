@@ -51,7 +51,7 @@
       <div class="col-sm-8">{{texts.ResultLabourMarketContributions}}</div>
       <div class="col-sm-4 text-right">-{{formatValuta(amBidrag)}}</div>
       <div class="col-sm-8">{{texts.UserInputDeduction}}</div>
-      <div class="col-sm-4 text-right">-{{formatValuta(fradrag)}}</div>
+      <div class="col-sm-4 text-right">-{{formatValuta(beregnetFradrag)}}</div>
       <hr class="w-100">
       <div class="col-sm-8">{{texts.ResultAIncome}}</div>
       <div class="col-sm-4 text-right">{{formatValuta(aIndkomst)}}</div>
@@ -62,19 +62,22 @@
 <script>
 import Modal from "./Modal";
 import { formatValuta } from "../helpers.js";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "ModalCollection",
-  props: [
-    "lonForSkat",
-    "atpArbejdsgiver",
-    "atpMedarbejder",
-    "amBidrag",
-    "fradrag",
-    "aIndkomst",
-    "texts",
-    "showModal"
-  ],
+  props: ["showModal"],
+  computed: {
+    ...mapState(["texts"]),
+    ...mapGetters([
+      "lonForSkat",
+      "atpArbejdsgiver",
+      "atpMedarbejder",
+      "amBidrag",
+      "beregnetFradrag",
+      "aIndkomst"
+    ])
+  },
   components: { Modal },
   methods: {
     formatValuta

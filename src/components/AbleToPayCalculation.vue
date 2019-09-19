@@ -3,7 +3,7 @@
     <div class="row text-center bg-white">
       <div class="col">
         <h2>{{texts.ResultIfCompanyPays}}</h2>
-        <p>{{formatValuta(userInput.selskabetBetaler)}}</p>
+        <p>{{formatValuta(selskabetBetaler)}}</p>
         <h2>{{texts.ResultEmployeeGets}}</h2>
         <p>{{formatValuta(lonEfterSkat)}}</p>
       </div>
@@ -16,7 +16,7 @@
         {{texts.ResultPayCosts}}
         <a href="#" @click="showModal = 'payCosts'" class="rounded-icon">?</a>
       </div>
-      <div class="col-sm-4 text-right">{{formatValuta(userInput.selskabetBetaler)}}</div>
+      <div class="col-sm-4 text-right">{{formatValuta(selskabetBetaler)}}</div>
       <div class="col-sm-8">
         {{texts.ResultATPEmployer}}
         <a
@@ -57,7 +57,7 @@
       </div>
       <div class="col-sm-4 text-right">-{{formatValuta(amBidrag)}}</div>
       <div class="col-sm-8">
-        {{texts.ResultATax}} ({{userInput.traekprocent}}% af {{formatValuta(aIndkomst)}})
+        {{texts.ResultATax}} ({{traekprocent}}% af {{formatValuta(aIndkomst)}})
         <a
           href="#"
           @click="showModal = 'aTax'"
@@ -73,26 +73,17 @@
     </div>
     <div class="row bg-white py-3 mt-3">
       <div class="col">
-        <button class="btn btn-primary" @click="$emit('changeStep', 'userinput')">Tilbage</button>
+        <button class="btn btn-primary" @click="changeStep('userinput')">Tilbage</button>
       </div>
     </div>
-    <ModalCollection
-      v-bind:lonForSkat="lonForSkat"
-      v-bind:atpArbejdsgiver="atpArbejdsgiver"
-      v-bind:atpMedarbejder="atpMedarbejder"
-      v-bind:amBidrag="amBidrag"
-      v-bind:fradrag="fradrag(this.userInput)"
-      v-bind:aIndkomst="aIndkomst"
-      v-bind:texts="texts"
-      v-bind:showModal="showModal"
-      v-on:close="showModal=null"
-    />
+    <ModalCollection v-on:close="showModal=null" v-bind:showModal="showModal"/>
   </div>
 </template>
 
 <script>
 import ModalCollection from "./ModalCollection";
-import { formatValuta, fradrag } from "../helpers";
+import { formatValuta } from "../helpers";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "AbleToPayCalculation",
@@ -101,34 +92,24 @@ export default {
       showModal: null
     };
   },
+  props: ["texts"],
   components: { ModalCollection },
-  props: ["texts", "userInput", "atpMedarbejder", "atpArbejdsgiver"],
   methods: {
-    formatValuta,
-    fradrag
+    ...mapMutations(["changeStep"]),
+    formatValuta
   },
   created() {},
   computed: {
-    lonForSkat() {
-      let lonForSkat = this.userInput.selskabetBetaler - this.atpArbejdsgiver;
-      return lonForSkat > 0 ? lonForSkat : 0;
-    },
-    lonEfterSkat() {
-      return this.lonForSkat - this.atpMedarbejder - this.amBidrag - this.aSkat;
-    },
-    amBidrag() {
-      return (this.lonForSkat - this.atpMedarbejder) * 0.08;
-    },
-    aIndkomst() {
-      const { lonForSkat, atpMedarbejder, amBidrag } = this;
-      const aIndkomst =
-        lonForSkat - atpMedarbejder - amBidrag - fradrag(this.userInput);
-
-      return aIndkomst > 0 ? aIndkomst : 0;
-    },
-    aSkat() {
-      return this.aIndkomst * (this.userInput.traekprocent / 100);
-    }
+    ...mapGetters([
+      "lonEfterSkat",
+      "aSkat",
+      "aIndkomst",
+      "amBidrag",
+      "lonForSkat",
+      "atpMedarbejder",
+      "atpArbejdsgiver"
+    ]),
+    ...mapState(["traekprocent", "selskabetBetaler"])
   }
 };
 </script>

@@ -11,8 +11,9 @@
         <div class="input-group">
           <input
             id="selskabetBetaler"
-            v-model.number="value.selskabetBetaler"
-            @input="update('selskabetBetaler', $event.target.value, true)"
+            name="selskabetBetaler"
+            :value="selskabetBetaler"
+            @input="onInput"
             type="number"
             min="1"
             class="form-control text-right"
@@ -32,12 +33,12 @@
           <legend>{{texts.UserInputPaymentFrequency}}</legend>
           <div class="custom-control custom-radio">
             <input
-              v-model="value.udbetalingsFrekvens"
-              @input="update('udbetalingsFrekvens', $event.target.value)"
+              value="maanedlig"
+              :checked="udbetalingsFrekvens === 'maanedlig'"
+              @input="onInput"
+              name="udbetalingsFrekvens"
               type="radio"
               id="maanedlig"
-              name="frequency"
-              value="maanedlig"
               class="custom-control-input"
               required
             >
@@ -48,12 +49,12 @@
           </div>
           <div class="custom-control custom-radio">
             <input
-              v-model="value.udbetalingsFrekvens"
-              @input="update('udbetalingsFrekvens', $event.target.value)"
+              value="fjortendage"
+              :checked="udbetalingsFrekvens === 'fjortendage'"
+              @input="onInput"
+              name="udbetalingsFrekvens"
               type="radio"
               id="fjortendage"
-              name="frequency"
-              value="fjortendage"
               class="custom-control-input"
               required
             >
@@ -73,8 +74,9 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model.number="value.arbejdsTimer"
-            @input="update('arbejdsTimer', $event.target.value, true)"
+            :value="arbejdsTimer"
+            name="arbejdsTimer"
+            @input="onInput"
             type="number"
             min="1"
             class="form-control text-right"
@@ -95,11 +97,11 @@
           <legend>{{texts.UserInputTaxCard}}</legend>
           <div class="custom-control custom-radio">
             <input
-              v-model="value.skattekort"
-              @input="update('skattekort', $event.target.value)"
+              value="hovedkort"
+              :checked="skattekort === 'hovedkort'"
+              @input="onInput"
               type="radio"
               id="hovedkort"
-              value="hovedkort"
               name="skattekort"
               class="custom-control-input"
               required
@@ -108,11 +110,11 @@
           </div>
           <div class="custom-control custom-radio">
             <input
-              v-model="value.skattekort"
-              @input="update('skattekort', $event.target.value)"
+              value="skattekort"
+              :checked="skattekort === 'bikort'"
+              @input="onInput"
               type="radio"
               id="bikort"
-              value="bikort"
               name="skattekort"
               class="custom-control-input"
               required
@@ -130,8 +132,9 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model.number="value.traekprocent"
-            @input="update('traekprocent', $event.target.value, true)"
+            :value="traekprocent"
+            name="traekprocent"
+            @input="onInput"
             id="traekprocent"
             type="number"
             class="form-control text-right"
@@ -153,8 +156,9 @@
       <div class="col">
         <div class="input-group">
           <input
-            v-model="value.fradrag"
-            @input="update('fradrag', $event.target.value, true)"
+            :value="fradrag"
+            name="fradrag"
+            @input="onInput"
             id="fradrag"
             type="number"
             min="1"
@@ -170,11 +174,7 @@
     </div>
     <div class="row mt-3 bg-white py-3">
       <div class="col d-flex justify-content-between">
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="$emit('changeStep', 'selection')"
-        >Tilbage</button>
+        <button type="button" class="btn btn-primary" @click="changeStep('selection')">Tilbage</button>
         <button type="submit" class="btn btn-primary">Næste</button>
       </div>
     </div>
@@ -182,6 +182,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "AbleToPay",
   data() {
@@ -189,22 +190,36 @@ export default {
       formValidated: false
     };
   },
-  props: ["value", "texts"],
-  computed: {},
+  props: ["texts"],
+  computed: mapState([
+    "selskabetBetaler",
+    "udbetalingsFrekvens",
+    "arbejdsTimer",
+    "skattekort",
+    "traekprocent",
+    "fradrag"
+  ]),
   methods: {
+    ...mapMutations(["setValue", "setNumber", "changeStep"]),
     next(e) {
       e.preventDefault();
       if (e.target.checkValidity()) {
-        this.$emit("changeStep", "conclusion");
+        this.changeStep("conclusion");
       } else {
         this.formValidated = true;
       }
     },
-    update(key, value, isNumber) {
-      if (isNumber) {
-        value = Number(value) || null;
+    onInput(e) {
+      const { name, value, type, id } = e.target;
+
+      switch (type) {
+        case "number":
+          this.setNumber({ field: name, value });
+          break;
+        case "radio":
+          this.setValue({ field: name, value: id });
+          break;
       }
-      this.$emit("input", { ...this.value, [key]: value });
     }
   }
 };
