@@ -34,7 +34,9 @@
       <div class="col-sm-4 text-right">{{formatValuta(lonForSkat)}}</div>
       <div class="col-sm-8">{{texts.ResultATPEmployee}}</div>
       <div class="col-sm-4 text-right">{{formatValuta(atpMedarbejder)}}</div>
-      <hr class="w-100">
+      <div class="col-12 p-1">
+        <hr class="w-100" />
+      </div>
       <div class="col-sm-8">AM grundlag</div>
       <div class="col-sm-4 text-right">{{formatValuta(lonForSkat - atpMedarbejder)}}</div>
     </Modal>
@@ -52,7 +54,9 @@
       <div class="col-sm-4 text-right">-{{formatValuta(amBidrag)}}</div>
       <div class="col-sm-8">{{texts.UserInputDeduction}}</div>
       <div class="col-sm-4 text-right">-{{formatValuta(beregnetFradrag)}}</div>
-      <hr class="w-100">
+      <div class="col-12 p-1">
+        <hr class="w-100" />
+      </div>
       <div class="col-sm-8">{{texts.ResultAIncome}}</div>
       <div class="col-sm-4 text-right">{{formatValuta(aIndkomst)}}</div>
     </Modal>
