@@ -67,7 +67,7 @@ export default {
     let url =
       document.location.hostname === "localhost"
         ? "data.json"
-        : "/websrv/jsong.ashx?Id=111229";
+        : "./websrv/jsong.ashx?Id=111229";
 
     // eslint-disable-next-line
     $.ajax({
