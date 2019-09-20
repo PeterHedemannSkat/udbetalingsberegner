@@ -14,59 +14,63 @@
       </div>
       <div class="col-8">
         {{texts.ResultPayCosts}}
-        <a href="#" @click="showModal = 'payCosts'" class="rounded-icon">?</a>
+        <button
+          type="button"
+          @click="showModal = 'payCosts'"
+          class="rounded-icon"
+        >?</button>
       </div>
       <div class="col-4 text-right">{{formatValuta(selskabetSkalBetale)}}</div>
       <div class="col-8">
         {{texts.ResultATPEmployer}}
-        <a
-          href="#"
+        <button
+          type="button"
           @click="showModal = 'atpEmployer'"
           class="rounded-icon"
-        >?</a>
+        >?</button>
       </div>
       <div class="col-4 text-right">-{{formatValuta(atpArbejdsgiver)}}</div>
       <div class="col-12">
-        <hr>
+        <hr />
       </div>
       <div class="col-8">
         {{texts.ResultPayBeforeTaxes}}
-        <a
-          href="#"
+        <button
+          type="button"
           @click="showModal = 'payBeforeTaxes'"
           class="rounded-icon"
-        >?</a>
+        >?</button>
       </div>
       <div class="col-4 text-right">{{formatValuta(lonForSkat)}}</div>
       <div class="col-8">
         {{texts.ResultATPEmployee}}
-        <a
-          href="#"
+        <button
+          type="button"
           @click="showModal = 'atpEmployee'"
           class="rounded-icon"
-        >?</a>
+        >?</button>
       </div>
       <div class="col-4 text-right">-{{formatValuta(atpMedarbejder)}}</div>
       <div class="col-8">
         {{texts.ResultLabourMarketContributions}} (8% af {{formatValuta(lonForSkat - atpMedarbejder)}})
-        <a
-          href="#"
+        <button
+          type="button"
           @click="showModal = 'labourMarketContributions'"
           class="rounded-icon"
-        >?</a>
+        >?</button>
       </div>
       <div class="col-4 text-right">-{{formatValuta(amBidrag)}}</div>
       <div class="col-8">
         {{texts.ResultATax}} ({{traekprocent}}% af {{formatValuta(aIndkomst)}})
-        <a
-          href="#"
+        <button
+          type="button"
           @click="showModal = 'aTax'"
           class="rounded-icon"
-        >?</a>
+        >?</button>
       </div>
       <div class="col-4 text-right">-{{formatValuta(aSkat)}}</div>
       <div class="col-12">
-        <hr>
+        <hr />
       </div>
       <div class="col-8">{{texts.ResultPayOut}}</div>
       <div class="col-4 text-right">{{formatValuta(udbetaltEfterSkat)}}</div>
@@ -76,7 +80,7 @@
         <button class="btn btn-primary" @click="changeStep('userinput')">Tilbage</button>
       </div>
     </div>
-    <ModalCollection v-on:close="showModal=null" v-bind:showModal="showModal"/>
+    <ModalCollection v-on:close="showModal=null" v-bind:showModal="showModal" />
   </div>
 </template>
 <script>
